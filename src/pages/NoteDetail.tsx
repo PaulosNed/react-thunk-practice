@@ -13,12 +13,12 @@ export const NoteDetail = () => {
     <div className="h-screen flex items-center justify-center bg-gray-200">
       <div className="bg-white p-8 w-[32rem]">
         <header className="flex font-light text-sm">
-          <p>note CATAGORY</p>
+          {/* <p>note CATAGORY</p> */}
         </header>
 
         <h2 className="font-bold text-3xl mt-2">{note.title}</h2>
 
-        <p className="mt-5">
+        {/* <p className="mt-5">
           By:
           <a href="#" className="text-red-600">
             {" "}
@@ -42,7 +42,7 @@ export const NoteDetail = () => {
             {" "}
             Gokhan Ozer{" "}
           </a>
-        </p>
+        </p> */}
 
         <h3 className="font-bold text-xl mt-8"> </h3>
         <p className="font-light">{note.body}</p>

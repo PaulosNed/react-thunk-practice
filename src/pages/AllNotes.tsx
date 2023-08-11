@@ -8,7 +8,7 @@ export const AllNotes = () => {
     const notes: Note[] = useSelector((state: any) => state.notes)
     
   return (
-    <div className="w-3/4 mx-auto bg-gray-200">
+    <div className="w-3/4 mx-auto">
       <div className="flex flex-col gap-4 items-center">
         {notes &&
           notes.map((note: Note) => (

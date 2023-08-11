@@ -53,7 +53,7 @@ export const AddNote = () => {
               Content
             </label>
             <textarea
-              rows={4}
+              rows={8}
               name="body"
               id="body"
               onChange={handleChange}

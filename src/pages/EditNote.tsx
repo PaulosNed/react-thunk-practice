@@ -64,7 +64,7 @@ export const EditNote = () => {
               Content
             </label>
             <textarea
-              rows={4}
+              rows={8}
               name="body"
               id="body"
               defaultValue={note.body}
