@@ -1,12 +1,13 @@
 import React from 'react'
 import { Note } from '../models/Note'
 import { useDispatch, useSelector } from 'react-redux'
-import { redirect, useParams } from 'react-router-dom'
+import { redirect, useNavigate, useParams } from 'react-router-dom'
 import { changeBody, changeTitle } from '../store/slices/formSlice'
 import { editNewNote } from '../store/thunks/editNote'
 
 export const EditNote = () => {
     
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const formValues = useSelector((state: any) => state.form)
     const notes: Note[] = useSelector((state: any) => state.notes.data)
@@ -32,7 +33,7 @@ export const EditNote = () => {
         }
 
         dispatch(editNewNote(payload) as any)
-        redirect('/')
+        navigate('/')
     }
 
   return (

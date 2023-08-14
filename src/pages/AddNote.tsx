@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import { changeBody, changeTitle } from "../store/slices/formSlice"
-import { redirect } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { addNewNote } from "../store/thunks/addNote";
 
 
 export const AddNote = () => {
-
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const formValues = useSelector((state: any) => state.form)
 
@@ -20,7 +20,7 @@ export const AddNote = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault()
         dispatch(addNewNote() as any)
-        redirect('/')
+        navigate('/')
     }
 
   return (
