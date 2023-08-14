@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export const NoteDetail = () => {
        
-    const notes: Note[] = useSelector((state: any) => state.notes)
+    const notes: Note[] = useSelector((state: any) => state.notes.data)
     const { id } = useParams()
     const note = notes.filter((n: Note) => n.id === Number(id))[0]
     

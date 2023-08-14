@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { formData } from "../../models/Props";
-import { addNote, editNote } from "./notesSlice";
+import { addNewNote } from "../thunks/addNote";
+import { editNewNote } from "../thunks/editNote";
 
 const initialState: formData = {
     title: "",
@@ -19,11 +20,11 @@ export const formSlice = createSlice({
         },
     },
     extraReducers(builder) {
-        builder.addCase(addNote, (state, action) => {
+        builder.addCase(addNewNote.fulfilled, (state, action) => {
             state.title = ''
             state.body = ''
         })
-        builder.addCase(editNote, (state, action) => {
+        builder.addCase(editNewNote.fulfilled, (state, action) => {
             state.title = ''
             state.body = ''
         })

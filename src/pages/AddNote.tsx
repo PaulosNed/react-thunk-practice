@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Note } from "../models/Note"
 import { changeBody, changeTitle } from "../store/slices/formSlice"
-import { addNote } from "../store/slices/notesSlice"
 import { redirect } from "react-router-dom";
+import { addNewNote } from "../store/thunks/addNote";
 
 
 export const AddNote = () => {
@@ -20,7 +19,7 @@ export const AddNote = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        dispatch(addNote(formValues))
+        dispatch(addNewNote() as any)
         redirect('/')
     }
 

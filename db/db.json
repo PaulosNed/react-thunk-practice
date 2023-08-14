@@ -1,28 +1,22 @@
 {
-    "notes": [
-      {
-        "id": 1691405684460,
-        "userId": "2",
-        "title": "Blog 001",
-        "body": "updated description"
-      },
-      {
-        "id": 1691412914339,
-        "userId": "2",
-        "title": "new blog edited",
-        "body": "ajsdnasd MND NSDas"
-      },
-      {
-        "id": 1691416561136,
-        "userId": "2",
-        "title": "added from form edited in form",
-        "body": "now even edited the description"
-      },
-      {
-        "id": 1691419175647,
-        "userId": 2,
-        "title": "New presenration titlr",
-        "body": "sdc mdns cnmsdbcnmsd csdvchjd"
-      }
-    ]
-  }
+  "notes": [
+    {
+      "id": 1691416561136,
+      "userId": "2",
+      "title": "first note",
+      "body": "the first note in the app"
+    },
+    {
+      "id": 1692002957548,
+      "userId": 1692002957549,
+      "title": "fromredux thunk edited",
+      "body": "kajsdgabsnmfas fadsbf"
+    },
+    {
+      "id": 1692010161092,
+      "userId": 1692010161093,
+      "title": "New note from thunk",
+      "body": "asjkbfndasm f nsdfbsd fasdfasdf"
+    }
+  ]
+}

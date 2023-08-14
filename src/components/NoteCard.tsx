@@ -2,14 +2,16 @@ import React from "react";
 import { Note } from "../models/Note";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteNote } from "../store/slices/notesSlice";
 import { MdDelete } from "react-icons/md";
+import { deleteNoteFromBackend } from "../store/thunks/editNote";
+import { deleteNote } from "../store/slices/notesSlice";
 
 export const NoteCard: React.FC<Note> = ({ id, userId, title, body }) => {
   const dispatch = useDispatch();
 
   const deleteItem = () => {
-    dispatch(deleteNote(id));
+    dispatch(deleteNoteFromBackend(id) as any);
+    dispatch(deleteNote(id) as any);
   };
 
   return (
