@@ -1,13 +1,13 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { Note } from "../models/Note";
-import { useSelector } from "react-redux";
+import { useFetchSingleNoteQuery } from "../store/apis/notesApi";
 
 export const NoteDetail = () => {
        
-    const notes: Note[] = useSelector((state: any) => state.notes.data)
     const { id } = useParams()
-    const note = notes.filter((n: Note) => n.id === Number(id))[0]
+    const {data, error, isLoading} = useFetchSingleNoteQuery(id);
+    const note: Note = data
     
   return (
     <div className="h-screen flex items-center justify-center bg-gray-200">
@@ -16,39 +16,16 @@ export const NoteDetail = () => {
           {/* <p>note CATAGORY</p> */}
         </header>
 
-        <h2 className="font-bold text-3xl mt-2">{note.title}</h2>
-
-        {/* <p className="mt-5">
-          By:
-          <a href="#" className="text-red-600">
-            {" "}
-            Ankush Gulati{" "}
-          </a>
-          ,
-          <a href="#" className="text-red-600">
-            {" "}
-            David Gevorkyan{" "}
-          </a>
-        </p>
-
-        <p>
-          Additional credits:
-          <a href="#" className="text-red-600">
-            {" "}
-            Michael Clark{" "}
-          </a>
-          ,
-          <a href="#" className="text-red-600">
-            {" "}
-            Gokhan Ozer{" "}
-          </a>
-        </p> */}
-
-        <h3 className="font-bold text-xl mt-8"> </h3>
-        <p className="font-light">{note.body}</p>
+        {isLoading && <p>Loading...</p>}
+        {data && <main>
+          <h2 className="font-bold text-3xl mt-2">{note.title}</h2>
+          <h3 className="font-bold text-xl mt-8"> </h3>
+          <p className="font-light">{note.body}</p>
+        </main>}
+        {error && <p>{error as string}</p>}
 
         <Link
-          to={`/edit/${note.id}`}
+          to={`/edit/${id}`}
           className="bg-zinc-800 text-white font-semibold py-2 px-5 text-sm mt-6 inline-flex items-center group"
         >
           <p> Edit </p>

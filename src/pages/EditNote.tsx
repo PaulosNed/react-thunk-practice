@@ -1,48 +1,70 @@
-import React from 'react'
-import { Note } from '../models/Note'
-import { useDispatch, useSelector } from 'react-redux'
-import { redirect, useNavigate, useParams } from 'react-router-dom'
-import { changeBody, changeTitle } from '../store/slices/formSlice'
-import { editNewNote } from '../store/thunks/editNote'
+import React from "react";
+import { Note } from "../models/Note";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { changeBody, changeTitle } from "../store/slices/formSlice";
+import { editNewNote } from "../store/thunks/editNote";
+import {
+  useEditNoteMutation,
+  useFetchSingleNoteQuery,
+} from "../store/apis/notesApi";
 
 export const EditNote = () => {
-    
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const formValues = useSelector((state: any) => state.form)
-    const notes: Note[] = useSelector((state: any) => state.notes.data)
-    const { id } = useParams()
-    const note = notes.filter((n: Note) => n.id === Number(id))[0]
-    
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const formValues = useSelector((state: any) => state.form);
+  const { id } = useParams();
+  const { data, error, isLoading } = useFetchSingleNoteQuery(id);
+  const [editNote, { isError }] = useEditNoteMutation();
+  const note: Note = data;
 
-    const handleChange = (e: any) => {
-        if (e.target.name === "title") {
-            dispatch(changeTitle(e.target.value))
-        } else {
-            dispatch(changeBody(e.target.value))
-        }
+  const handleChange = (e: any) => {
+    if (e.target.name === "title") {
+      dispatch(changeTitle(e.target.value));
+    } else {
+      dispatch(changeBody(e.target.value));
     }
+  };
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        
-        const payload = {
-            id: Number(id),
-            title: formValues.title ? formValues.title : note.title,
-            body: formValues.body ? formValues.body: note.body,
-        }
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
 
-        dispatch(editNewNote(payload) as any)
-        navigate('/')
+    const payload = {
+      id: Number(id),
+      userId: data.userId,
+      title: formValues.title ? formValues.title : note.title,
+      body: formValues.body ? formValues.body : note.body,
+    };
+    try {
+      await editNote(payload);
+      console.log(isError)
+      if (!isError){
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error)
     }
+  };
 
   return (
     <div className="flex items-center justify-center p-12">
       <div className="mx-auto w-full max-w-[550px]">
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
-            <input type="number" name="id" id="id" className="hidden" defaultValue={note.id}/>
-            <input type="number" name="userId" id="userId" className="hidden" defaultValue={note.userId}/>
+            <input
+              type="number"
+              name="id"
+              id="id"
+              className="hidden"
+              defaultValue={note.id}
+            />
+            <input
+              type="number"
+              name="userId"
+              id="userId"
+              className="hidden"
+              defaultValue={note.userId}
+            />
             <label
               htmlFor="title"
               className="mb-3 block text-base font-medium text-[#07074D]"
@@ -82,5 +104,5 @@ export const EditNote = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};

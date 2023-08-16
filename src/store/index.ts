@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { formSlice } from "./slices/formSlice";
-import { notesSlice } from "./slices/notesSlice";
+import { notesApi } from "./apis/notesApi";
+import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
 export const store = configureStore({
     reducer: {
         form: formSlice.reducer,
-        notes: notesSlice.reducer
+        [notesApi.reducerPath]: notesApi.reducer
+    }, 
+    middleware: (getDefaultMiddleware) => {
+        return getDefaultMiddleware().concat(notesApi.middleware)
     }
 })
+
+setupListeners(store.dispatch)

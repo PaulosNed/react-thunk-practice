@@ -1,13 +1,16 @@
 import { useDispatch, useSelector } from "react-redux"
 import { changeBody, changeTitle } from "../store/slices/formSlice"
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addNewNote } from "../store/thunks/addNote";
+import { Note } from "../models/Note";
+import { useCreateNoteMutation } from "../store/apis/notesApi";
 
 
 export const AddNote = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const formValues = useSelector((state: any) => state.form)
+    const [createNote, { isLoading, isError }] = useCreateNoteMutation();
 
     const handleChange = (e: any) => {
         if (e.target.name === "title") {
@@ -17,16 +20,28 @@ export const AddNote = () => {
         }
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async(e: any) => {
         e.preventDefault()
-        dispatch(addNewNote() as any)
-        navigate('/')
+        
+        const payload = {
+          id: Date.now(),
+          userId: Date.now() + 1,
+          title: formValues.title,
+          body: formValues.body,
+        };
+        try {
+          await createNote(payload)
+          navigate('/')
+        } catch (error) {
+          console.log(error)
+        }
     }
 
   return (
     <div className="flex items-center justify-center p-12">
       <div className="mx-auto w-full max-w-[550px]">
-        <form onSubmit={handleSubmit}>
+        {isLoading && <p>Editing note...</p>}
+        {!isLoading && <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <label
               htmlFor="title"
@@ -66,7 +81,8 @@ export const AddNote = () => {
               Submit
             </button>
           </div>
-        </form>
+        </form>}
+        {isError && <p>error</p>}
       </div>
     </div>
   )

@@ -1,22 +1,16 @@
 {
   "notes": [
     {
-      "id": 1691416561136,
-      "userId": "2",
-      "title": "first note",
-      "body": "the first note in the app"
+      "id": 1692173260775,
+      "userId": 1692173260776,
+      "title": "new note from edit form",
+      "body": "asldbfsda fsdfsadf ahsdbhasmn dasdbhmsabdmnasdasd"
     },
     {
-      "id": 1692010161092,
-      "userId": 1692010161093,
-      "title": "New note from thunk",
-      "body": "asjkbfndasm f nsdfbsd fasdfasdf"
-    },
-    {
-      "id": 1692024233031,
-      "userId": 1692024233032,
-      "title": "new note to check redirect",
-      "body": "akjsdfbvmansd fmnsdbfmn sdfhmsdbnf sdfnsdfmnsd fsdfsd fd"
+      "id": 1692173704908,
+      "userId": 1692173704909,
+      "title": "to check caching problem",
+      "body": "ksdafasd fmasdbf sdfhasd f"
     }
   ]
 }
